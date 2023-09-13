@@ -3,27 +3,22 @@ package main
 import (
 	"fmt"
 	"log"
-    "gopkg.in/yaml.v3"
+
+	p "github.com/maranix/raven/parser"
 )
 
-type T struct {
-	Name        string
-	Description string
-}
-
 func main() {
+	mod := p.T{}
 	data := `
         name: Test
         description: This is a test for yaml
     `
 
-	t := T{}
-
-	err := yaml.Unmarshal([]byte(data), &t)
+	err := p.ParseOnce(data, &mod)
 
 	if err != nil {
-		log.Fatalln("Couldn't unmarshal data")
+		log.Fatalf("Failed to parse data: %v", err)
 	}
 
-	fmt.Printf("%v", t)
+	fmt.Printf("%v", mod)
 }
