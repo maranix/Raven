@@ -2,22 +2,31 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
+	"os"
 
-	p "github.com/maranix/raven/parser"
+	m "github.com/maranix/raven/models"
+	"gopkg.in/yaml.v3"
 )
 
 func main() {
-	mod := p.T{}
-	data := `
-        name: Test
-        description: This is a test for yaml
-    `
+	mod := m.RootModule{}
 
-	err := p.ParseOnce(data, &mod)
-
+	file, err := os.Open("test.yaml")
 	if err != nil {
-		log.Fatalf("Failed to parse data: %v", err)
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	data, err := io.ReadAll(file)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = yaml.Unmarshal(data, &mod)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	fmt.Printf("%v", mod)
