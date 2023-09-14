@@ -2,24 +2,17 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"log"
-	"os"
 
 	m "github.com/maranix/raven/models"
+	p "github.com/maranix/raven/parser"
 	"gopkg.in/yaml.v3"
 )
 
 func main() {
 	mod := m.RootModule{}
 
-	file, err := os.Open("test.yaml")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
-
-	data, err := io.ReadAll(file)
+	data, err := p.ReadFile("test.yaml")
 	if err != nil {
 		log.Fatal(err)
 	}
