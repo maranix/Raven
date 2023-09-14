@@ -1,2 +1,10 @@
 name: Test
 description: This is a test for yaml
+workdir: test
+jobs:
+  pre:
+    - "Hi"
+    - "Started"
+  post:
+    - "Done"
+    - "Bye"
