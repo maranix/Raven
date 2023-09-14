@@ -3,8 +3,17 @@ description: This is a test for yaml
 workdir: test
 jobs:
   pre:
-    - "Hi"
-    - "Started"
+    - exec: something
+      command: it could be something that i want to execute
+      workdir: somedir
+
+    - exec: something
+      command: it could be something that i want to execute
+      workdir: somedir
   post:
-    - "Done"
-    - "Bye"
+    - exec: something
+      command: it could be something that i want to execute
+      workdir: somedir
+
+    - exec: something
+      command: it could be something that i want to execute
