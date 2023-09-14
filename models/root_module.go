@@ -5,8 +5,11 @@ type RootModule struct {
 	Name string
 
 	// description of the module
-	Description string
+	Description string `yaml:"description,omitempty"`
+
+	// directory to execute commands and start generating templates
+	Workdir string
 
 	// a custom hook for convenience to run pre-init and post-init jobs
-	// Jobs JobHook `yaml:"jobs, omitempty"`
+	Jobs JobHook `yaml:"jobs,omitempty"`
 }
